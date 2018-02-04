@@ -41,11 +41,7 @@ class User():
         for item in self.basket:
             readBasket.append(item.getName())
         return readBasket
-
-    
-
-    
-                      
+            
 
     #Returns 2D list in form [[name,days],etc.] for ease of write to file
     def basketToList(self):
