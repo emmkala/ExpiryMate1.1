@@ -10,12 +10,15 @@ bottomFrame.pack(side=BOTTOM)
 header = Label(topFrame, text="Welcome to ExpiryMate!", fg="green")
 header.config(font=('bold',36))
 header.pack()
-
-
-
+##Insert username entry slot with caption.
+entryHeader = Label(bottomFrame, text="Please Enter A Username: ", fg="green")
+entryHeader.config(font=('itallic',18))
+entryHeader.place(x=485, y=300)
+enterName = Entry(bottomFrame)
+enterName.place(x=775, y=306)
 ##New user button in the bottom left.
 newUserB = Button(bottomFrame, text="Add New User", fg="green")
-newUserB.pack(side=BOTTOM)
+newUserB.place(x=1200, y=700)
 
 homePage.mainloop()
 
