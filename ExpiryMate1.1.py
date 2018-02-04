@@ -4,7 +4,6 @@ from tkinter import font as tkfont
 from userClass import User
 
 currentUser = User("")
-data = CSVeditor()
 
 def createUser(name):
         currentUser = User(name)
@@ -120,4 +119,3 @@ class SimpleTable(tk.Frame):
 if __name__ == "__main__":
     app = ExpiryMate()
     app.mainloop()
-
