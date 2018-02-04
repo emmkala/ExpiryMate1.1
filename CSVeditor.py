@@ -80,18 +80,18 @@ class CSVeditor():
                     elif (row[column].split(" "))[1] == "year" or row[column][1] == "years":
                         user.addItem(item,int(row[column][0]) * 365)
                     else:
-                        #print "Something went wrong with converting week/day/month/year"
+                        print("Something went wrong with converting week/day/month/year")
                     pass
 
     def wipe_before_save(self,userName):
-    with open(userName + '_account_data.csv', "w",newline="") as csvFile:
-        csvFileWriter = csv.writer(csvFile)
-        csvFileWriter.writerow(['FoodItem','DaysLeft'])                   
+        with open(userName + '_account_data.csv', "w",newline="") as csvFile:
+            csvFileWriter = csv.writer(csvFile)
+            csvFileWriter.writerow(['FoodItem','DaysLeft'])                   
 
     def saveBasket(self,listOfItems,userName):
         with open(userName + '_account_data.csv', "a",newline="",encoding='utf-8' ) as csvFile:
             csvFileWriter = csv.writer(csvFile)
             for item in listOfItems:
-                csvFileWriter.writerow([item[0],item[1])
+                csvFileWriter.writerow([item[0],item[1]])
         csvFile.close()
 
