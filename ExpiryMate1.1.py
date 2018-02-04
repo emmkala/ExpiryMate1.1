@@ -21,4 +21,3 @@ newUserB = Button(bottomFrame, text="Add New User", fg="green")
 newUserB.place(x=1200, y=700)
 
 homePage.mainloop()
-
