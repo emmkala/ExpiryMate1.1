@@ -46,7 +46,7 @@ class CSVeditor():
             csvFileWriter.writerow(['FoodItem','DaysLeft'])
 
     def loadUserData(self,userName):
-    userFoodList = {}
+        userFoodList = {}
         with open(userName + '_account_data.csv') as csvFile:
             readCSV = csv.reader(csvFile, delimiter=',')
             for row in readCSV:
