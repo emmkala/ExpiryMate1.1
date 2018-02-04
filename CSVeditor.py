@@ -5,6 +5,14 @@ from userClass import User
 from itemClass import Item
 
 class CSVeditor():
+    def checkExisting(self,name):
+        try:
+            with open(name+'_account_data.csv') as csvFile:
+                readCSV = csv.reader(csvFile, delimiter=',')
+                return True
+        except FileNotFoundError:
+            return False
+        
     def createCSVHeader(self):
         with open(self.path, 'w', newline="") as csvFile:
             csvFileWriter = csv.writer(csvFile)
@@ -80,8 +88,7 @@ class CSVeditor():
                     elif (row[column].split(" "))[1] == "year" or row[column][1] == "years":
                         user.addItem(item,int(row[column][0]) * 365)
                     else:
-                        print("Something went wrong with converting week/day/month/year")
-                    pass
+                        pass
 
     def wipe_before_save(self,userName):
         with open(userName + '_account_data.csv', "w",newline="") as csvFile:
