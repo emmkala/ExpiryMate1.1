@@ -9,3 +9,4 @@ test_1 = Label(homePage, text="Test")
 test_1.grid(row=0)
 
 homePage.mainloop()
+
