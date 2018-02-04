@@ -5,6 +5,14 @@ from userClass import User
 from itemClass import Item
 
 class CSVeditor():
+    def checkExisting(self,name):
+        try:
+            with open(name+'_account_data.csv') as csvFile:
+                readCSV = csv.reader(csvFile, delimiter=',')
+                return True
+        except FileNotFoundError:
+            return False
+        
     def createCSVHeader(self):
         with open(self.path, 'w', newline="") as csvFile:
             csvFileWriter = csv.writer(csvFile)
@@ -46,7 +54,7 @@ class CSVeditor():
             csvFileWriter.writerow(['FoodItem','DaysLeft'])
 
     def loadUserData(self,userName):
-    userFoodList = {}
+        userFoodList = {}
         with open(userName + '_account_data.csv') as csvFile:
             readCSV = csv.reader(csvFile, delimiter=',')
             for row in readCSV:
@@ -81,17 +89,17 @@ class CSVeditor():
                         user.addItem(item,int(row[column][0]) * 365)
                     else:
                         #print "Something went wrong with converting week/day/month/year"
-                    pass
+                        pass
 
     def wipe_before_save(self,userName):
-    with open(userName + '_account_data.csv', "w",newline="") as csvFile:
-        csvFileWriter = csv.writer(csvFile)
-        csvFileWriter.writerow(['FoodItem','DaysLeft'])                   
+        with open(userName + '_account_data.csv', "w",newline="") as csvFile:
+            csvFileWriter = csv.writer(csvFile)
+            csvFileWriter.writerow(['FoodItem','DaysLeft'])                   
 
     def saveBasket(self,listOfItems,userName):
         with open(userName + '_account_data.csv', "a",newline="",encoding='utf-8' ) as csvFile:
             csvFileWriter = csv.writer(csvFile)
             for item in listOfItems:
-                csvFileWriter.writerow([item[0],item[1])
+                csvFileWriter.writerow([item[0],item[1]])
         csvFile.close()
 
