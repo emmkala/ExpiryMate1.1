@@ -46,9 +46,12 @@ class CreateUser(tk.Frame):
         self.controller = controller
         label = tk.Label(self, text="Please create a new user to continue!", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
+        enterName = tk.Entry(self,
+                             command=lambda: 
         toFunctions = tk.Button(self, text="Go to functions.", bg="green",
                                 command=lambda: controller.show_frame("FunctionalPage"))
         toFunctions.pack()
+        
 
 class FunctionalPage(tk.Frame):
     def __init__(self,parent,controller):
