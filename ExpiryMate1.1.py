@@ -38,6 +38,9 @@ class TitlePage(tk.Frame):
         label.pack( fill="x", pady=10)
         newUser = tk.Button(self, text="Add a new user", bg="green",
                             command=lambda: controller.show_frame("CreateUser"))
+
+        
+        
         functionalScreen = tk.Button(self, text="Click Here if you are an existing user", bg="green",
                                      command=lambda: controller.show_frame("FunctionalPage"))
         quitButton = tk.Button(self, text="Click to Quit", bg="green",
@@ -71,6 +74,9 @@ class FunctionalPage(tk.Frame):
         label = tk.Label(self, text="Functions Page!", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
 
+        t = SimpleTable(self)
+        t.pack(side="right", fill="y")
+
         enterFood = tk.Entry(self)
         enterFood.pack()
         enterDay = tk.Entry(self)
@@ -88,6 +94,27 @@ class FunctionalPage(tk.Frame):
         returnMenu = tk.Button(self, text="Return to the home page.", bg="green",
                                command=lambda: controller.show_frame("TitlePage"))
         returnMenu.pack()
+
+class SimpleTable(tk.Frame):
+    def __init__(self, parent, rows, columns):
+        tk.Frame.__init__(self, parent, background="black")
+        self._widgets = []
+        for row in range(rows):
+            current_row = []
+            for column in range(columns):
+                label = tk.Label(self, text="%s/%s" % (row, column), 
+                                 borderwidth=0, width=10)
+                label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+                current_row.append(label)
+            self._widgets.append(current_row)
+
+        for column in range(columns):
+            self.grid_columnconfigure(column, weight=1)
+
+
+    def set(self, row, column, value):
+        widget = self._widgets[row][column]
+        widget.configure(text=value)
 
 if __name__ == "__main__":
     app = ExpiryMate()
