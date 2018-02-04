@@ -88,7 +88,6 @@ class CSVeditor():
                     elif (row[column].split(" "))[1] == "year" or row[column][1] == "years":
                         user.addItem(item,int(row[column][0]) * 365)
                     else:
-                        #print "Something went wrong with converting week/day/month/year"
                         pass
 
     def wipe_before_save(self,userName):

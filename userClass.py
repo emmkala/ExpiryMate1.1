@@ -22,7 +22,8 @@ class User():
                           
     #Delet by loop return none
     def deleteItem(self,name):
-       for item in basket:
+        
+       for item in self.basket:
             if item.getName() == name:
                 self.basket.remove(item)
 

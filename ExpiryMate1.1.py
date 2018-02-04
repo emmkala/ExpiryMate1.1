@@ -1,7 +1,14 @@
+from CSVeditor import CSVeditor
 import tkinter as tk
 from tkinter import font as tkfont
+from userClass import User
 
+currentUser = User("")
+data = CSVeditor()
 
+def createUser(name):
+        currentUser = User(name)
+        
 class ExpiryMate(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -41,16 +48,21 @@ class TitlePage(tk.Frame):
         quitButton.pack()
 
 class CreateUser(tk.Frame):
+    
     def __init__(self,parent,controller):
         tk.Frame.__init__(self,parent)
         self.controller = controller
         label = tk.Label(self, text="Please create a new user to continue!", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
-        enterName = tk.Entry(self,
-                             command=lambda: 
-        toFunctions = tk.Button(self, text="Go to functions.", bg="green",
+        enterName = tk.Entry(self)
+        enterName.pack()
+        setUser = tk.Button(self, text="Set New User.", bg="green",
+                                command=lambda: createUser(enterName.get()))
+        toFunctions = tk.Button(self, text="Proceed to Functional Page", bg="green",
                                 command=lambda: controller.show_frame("FunctionalPage"))
+        setUser.pack()
         toFunctions.pack()
+
         
 
 class FunctionalPage(tk.Frame):
@@ -59,6 +71,21 @@ class FunctionalPage(tk.Frame):
         self.controller = controller
         label = tk.Label(self, text="Functions Page!", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
+
+        enterFood = tk.Entry(self)
+        enterFood.pack()
+        enterDay = tk.Entry(self)
+        enterDay.pack()
+        addFood = tk.Button(self, text="Click here to add a new food item!", bg="green",
+                            command=lambda: currentUser.addItem(enterFood.get(),int(enterDay.get())))
+        addFood.pack()
+
+        deleteFood = tk.Entry(self)
+        deleteFood.pack()
+        removeFood = tk.Button(self, text="Click here to remove the entered food item.", bg="green",
+                               command=lambda: currentUser.deleteItem(deleteFood.get()))
+        removeFood.pack()
+        
         returnMenu = tk.Button(self, text="Return to the home page.", bg="green",
                                command=lambda: controller.show_frame("TitlePage"))
         returnMenu.pack()
