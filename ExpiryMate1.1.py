@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import font as tkfont
+from userClass import User
 
 
 class ExpiryMate(tk.Tk):
@@ -41,16 +42,23 @@ class TitlePage(tk.Frame):
         quitButton.pack()
 
 class CreateUser(tk.Frame):
+    def createUser(self,name):
+        newUser = User(name)
     def __init__(self,parent,controller):
         tk.Frame.__init__(self,parent)
         self.controller = controller
         label = tk.Label(self, text="Please create a new user to continue!", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
-        enterName = tk.Entry(self,
-                             command=lambda: 
-        toFunctions = tk.Button(self, text="Go to functions.", bg="green",
+        newUser = ""
+        enterName = tk.Entry(self)
+        enterName.pack()
+        setUser = tk.Button(self, text="Set New User.", bg="green",
+                                command=lambda: self.createUser(enterName.get()))
+        toFunctions = tk.Button(self, text="Proceed to Functional Page", bg="green",
                                 command=lambda: controller.show_frame("FunctionalPage"))
+        setUser.pack()
         toFunctions.pack()
+
         
 
 class FunctionalPage(tk.Frame):
