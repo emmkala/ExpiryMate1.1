@@ -1,39 +1,13 @@
-<<<<<<< HEAD
-from tkinter import *
-
-##Create home page for the UI.
-homePage = Tk()
-topFrame = Frame(homePage, width=1500, height=900)
-topFrame.pack()
-bottomFrame = Frame(homePage, width=1500, height=900)
-bottomFrame.pack(side=BOTTOM)
-##Create the title or header of our home page introducing them to the app.
-header = Label(topFrame, text="Welcome to ExpiryMate!", fg="#A8FFCA")
-header.config(font=('bold',36))
-header.pack()
-##Insert username entry slot with caption.
-entryHeader = Label(bottomFrame, text="Please Enter A Username: ", fg="green")
-entryHeader.config(font=('itallic',18))
-entryHeader.place(x=485, y=300)
-enterName = Entry(bottomFrame)
-enterName.place(x=775, y=306)
-##New user button in the bottom left.
-newUserB = Button(bottomFrame, text="Add New User", fg="#8EB897")
-newUserB.place(x=1200, y=700)
-
-
-
-homePage.mainloop()
-=======
 import tkinter as tk
 from tkinter import font as tkfont
-
 
 class ExpiryMate(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
         
-        self.title_font = tkfont.Font(family='Helvecita', size=28, weight="bold", slant="italic",)
+        self.title_font = tkfont.Font(family='Georgia', size=28, weight="bold", slant="italic")
+        self.subtitle_font = tkfont.Font(family='Georgia', size=16, weight='bold', slant="italic")
+        self.text_font = tkfont.Font(family='Georgia', size=10, weight='bold', slant="italic")
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
@@ -55,27 +29,36 @@ class TitlePage(tk.Frame):
     def __init__(self,parent,controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="This Is The Title Page", font=controller.title_font)
-        label.pack( fill="x", pady=10)
-        newUser = tk.Button(self, text="Add a new user", bg="green",
+        labelHidden1 = tk.Label(self, text="000", fg="#aff2a9", bg="#aff2a9")
+        labelHidden1.pack(side="left", fill="y", padx=16)
+        labelHidden2 = tk.Label(self, text="000", fg="#aff2a9", bg="#aff2a9")
+        labelHidden2.pack(side="right", fill="y", padx=16)
+        labelLogo = tk.Label(self, text="ExpiryMate", font=controller.title_font, bg="#60875d", fg="#aff2a9")
+        labelSub = tk.Label(self, text="Sign In or Sign Up", font=controller.subtitle_font, bg="#78a974", fg="#a1dd9c")
+        labelLogo.pack( fill="x", pady=10)
+        labelSub.pack( fill="x", pady=15)
+        newUser = tk.Button(self, text="New User", bg="#89bf85",
                             command=lambda: controller.show_frame("CreateUser"))
-        functionalScreen = tk.Button(self, text="Click Here if you are an existing user", bg="green",
+        newUser['font'] = controller.text_font
+        functionalScreen = tk.Button(self, text="Existing User", bg="#78a974",
                                      command=lambda: controller.show_frame("FunctionalPage"))
-        quitButton = tk.Button(self, text="Click to Quit", bg="green",
+        functionalScreen['font'] = controller.text_font
+        quitButton = tk.Button(self, text="Quit", bg="#60875d",
                                command=lambda: exit())
-        newUser.pack()
-        functionalScreen.pack()
-        quitButton.pack()
+        quitButton['font'] = controller.text_font
+        newUser.pack(pady=25)
+        functionalScreen.pack(pady=25)
+        quitButton.pack(pady=75)
 
 class CreateUser(tk.Frame):
     def __init__(self,parent,controller):
         tk.Frame.__init__(self,parent)
         self.controller = controller
-        label = tk.Label(self, text="Please create a new user to continue!", font=controller.title_font)
+        label = tk.Label(self, text="Please Sign Up to Continue!", font=controller.title_font)
         label.pack(side="top", fill="x", pady=10)
-        enterName = tk.Entry(self,
-                             command=lambda: 
-        toFunctions = tk.Button(self, text="Go to functions.", bg="green",
+        enterName = tk.Entry(self)
+        enterName.pack()
+        toFunctions = tk.Button(self, text="Go to Main Menu.", bg="green",
                                 command=lambda: controller.show_frame("FunctionalPage"))
         toFunctions.pack()
         
@@ -93,4 +76,3 @@ class FunctionalPage(tk.Frame):
 if __name__ == "__main__":
     app = ExpiryMate()
     app.mainloop()
->>>>>>> b7af9694f777ba1c09a018a0a10bbc08df750c9b
