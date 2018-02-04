@@ -13,19 +13,24 @@ class CSVeditor():
         except FileNotFoundError:
             return False
         
-    def createCSVHeader(self):
-        with open(self.path, 'w', newline="") as csvFile:
+    def createCSVHeader(self,name):
+        with open(name, 'w', newline="") as csvFile:
             csvFileWriter = csv.writer(csvFile)
             csvFileWriter.writerow(['Item','Room Temperature','Refrigerator','Freezer at 0°F'])
         csvFile.close()
 
+    def appendToCSV(self,col_one,col_two,col_three,col_four):
+        with open('FoodList.csv', "a",newline="",encoding='utf-8' ) as csvFile:
+            csvFileWriter = csv.writer(csvFile)
+            csvFileWriter.writerow([col_one,col_two,col_three,col_four])
+        csvFile.close()
+
     def fillFoodList(self):
-        createCSVHeader('FoodList.csv')
+        self.createCSVHeader('FoodList.csv')
         data = []
         response = urllib.request.urlopen("https://food.unl.edu/food-storage-chart-cupboardpantry-refrigerator-and-freezer")
         line = response.readline()
         foodItem = []
-        count = 1
         
         while len(line) != 0:
             textLine = line.decode('utf-8')
@@ -43,9 +48,8 @@ class CSVeditor():
                         data = ""
                 foodItem.append(data)
                 if len(foodItem) == 4:
-                    appendToCSV(foodItem[0],foodItem[1],foodItem[2],foodItem[3])
-                    foodItem = []
-                count = count + 1    
+                    self.appendToCSV(foodItem[0],foodItem[1],foodItem[2],foodItem[3])
+                    foodItem = []     
             line = response.readline()
 
     def createNewUser(self,userName):
@@ -64,7 +68,9 @@ class CSVeditor():
                 itemData['daysLeft'] = daysLeft
                 userFoodList[foodName] = itemData
         return userFoodList
-
+    
+    
+    
     def addItem(self,user,item,storageMethod):
         with open('FoodList.csv') as csvFile:
             readCSV = csv.reader(csvFile, delimiter=',')
