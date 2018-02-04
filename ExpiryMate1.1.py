@@ -38,7 +38,7 @@ class TitlePage(tk.Frame):
         label.pack( fill="x", pady=10)
         newUser = tk.Button(self, text="Add a new user", bg="green",
                             command=lambda: controller.show_frame("CreateUser"))
-
+        
         
         
         functionalScreen = tk.Button(self, text="Click Here if you are an existing user", bg="green",
